@@ -4,11 +4,41 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
+   <ImageView
+       android:id="@+id/iImagenPerfil"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:background="@drawable/com_facebook_profile_picture_blank_portrait"
+       android:layout_gravity="center"/>
     <TextView
+        android:id="@+id/tNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="Nombre"/>
+    <TextView
+        android:id="@+id/tCorreo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="Correo electronico"/>
+    <EditText
+        android:id="@+id/eTCompartir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="texto para compartir"/>
+    <ImageView
+        android:id="@+id/iCompartir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hola mundo"
-        android:id="@+id/tUsuario"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.09" />
+        android:background="@drawable/cup"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Compartir"
+        android:onClick="compartir"
+        />
+
 </LinearLayout>

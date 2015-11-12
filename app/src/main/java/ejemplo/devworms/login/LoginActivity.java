@@ -42,6 +42,7 @@ import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
 import java.security.MessageDigest;
@@ -176,22 +177,23 @@ public class LoginActivity extends AppCompatActivity{
             }
         });
 
+    }
 
-        //******Redes sociales*/
+    private void linkearConFb(final ParseUser user)
+    {
+        List<String> permissions = Arrays.asList("user_birthday", "user_location", "user_friends", "email", "public_profile");
 
-       /* ParseFacebookUtils.logInWithReadPermissionsInBackground(this, null, new LogInCallback() {
-            @Override
-            public void done(ParseUser user, ParseException err) {
-                if (user == null) {
-                    Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
-                } else if (user.isNew()) {
-                    Log.d("MyApp", "User signed up and logged in through Facebook!");
-                } else {
-                    Log.d("MyApp", "User logged in through Facebook!");
+        if (!ParseFacebookUtils.isLinked(user)) {
+            ParseFacebookUtils.linkWithReadPermissionsInBackground(user, this, permissions, new SaveCallback() {
+                @Override
+                public void done(ParseException ex) {
+                    if (ParseFacebookUtils.isLinked(user)) {
+                        Log.d("MyApp", "Woohoo, user logged in with Facebook!");
+                    }
                 }
-            }
-        });
-*/
+            });
+        }
+
     }
 
     @Override
