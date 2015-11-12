@@ -1,16 +1,23 @@
 package ejemplo.devworms.login;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.model.ShareOpenGraphAction;
 import com.facebook.share.model.ShareOpenGraphContent;
 import com.facebook.share.model.ShareOpenGraphObject;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
+
 
 /**
  * Created by sergio on 26/10/15.
@@ -26,12 +33,16 @@ public class MainActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
     }
 
     public void compartir(View view)
     {
+
+        iCompartir = (ImageView) findViewById(R.id.iCompartir);
         // Create an object
-        ShareOpenGraphObject object = new ShareOpenGraphObject.Builder()
+        /*ShareOpenGraphObject object = new ShareOpenGraphObject.Builder()
                 .putString("og:type", "books.book")
                 .putString("og:title", "A Game of Thrones")
                 .putString("og:description", "In the frozen wastes to the north of Winterfell, sinister and supernatural forces are mustering.")
@@ -40,10 +51,11 @@ public class MainActivity extends Activity{
 
 
         // Create an action
-        ShareOpenGraphAction action = new ShareOpenGraphAction.Builder()
+       /* ShareOpenGraphAction action = new ShareOpenGraphAction.Builder()
                 .setActionType("books.reads")
                 .putObject("book", object)
                 .build();
+*//*
 
         // Create the content
         ShareOpenGraphContent content = new ShareOpenGraphContent.Builder()
@@ -51,6 +63,85 @@ public class MainActivity extends Activity{
                 .setAction(action)
                 .build();
 
+        ShareDialog.show(this, content);*/
+
+// compartir una imagen
+        //Se saca la imagen de los recursos
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.salchichas);
+
+       /*SharePhoto photo = new SharePhoto.Builder()
+                .setBitmap(bitmap)
+               .setUserGenerated(true)
+               .build();*/
+      /*  SharePhotoContent content = new SharePhotoContent.Builder()
+                .addPhoto(photo)
+                .build();*/
+        //Compartir un enlace con links*/
+
+       /* ShareLinkContent content = new ShareLinkContent.Builder()
+                .setContentUrl(Uri.parse("https://2014.spaceappschallenge.org/project/mision-tierra-2040/"))
+                .setContentTitle("Aqui empezó a desarrollarse Misión Tierra")
+                .setContentDescription("En este evento, fué dónde aprendimos a programar en corona SDK\nla dirección de la versión final del jugo es:\nGoogle play: https://play.google.com/store/apps/details?id=com.raptoruvg.misiontierra2040&hl=es_419\n iTunes: https://itunes.apple.com/mx/app/mision-tierra/id963621670?mt=8")
+                .setImageUrl(Uri.parse("https://lh6.ggpht.com/SMcpxShLQD42zuBMx33Hovh7fvYG0pYabp8aN4cLhsiUEFzOdcLlpD7_qeGfRiyZCQ=h900-rw"))
+                .build();
+*/
+        //Compartir texto
+
+
+        // Create an object
+  /*      ShareOpenGraphObject object = new ShareOpenGraphObject.Builder()
+                .putString("og:type", "books.reads")
+                .putString("og:title", "A Game of Thrones")
+                .putString("og:description", "In the frozen wastes to the north of Winterfell, sinister and supernatural forces are mustering.")
+                .putString("books:isbn", "0-553-57340-3")
+                //.putPhoto("image", photo)
+                .build();
+        // Create an action
+        ShareOpenGraphAction action = new ShareOpenGraphAction.Builder()
+                .setActionType("books.reads")
+                .putObject("book", object)
+                .putPhoto("image", photo)
+                .build();
+
+        // Create the content
+        ShareOpenGraphContent content = new ShareOpenGraphContent.Builder()
+                .setPreviewPropertyName("book")
+
+                .setAction(action)
+                .build();
+
+*/
+
+        //Compartir texto
+
+
+// Create an object
+        ShareOpenGraphObject object = new ShareOpenGraphObject.Builder()
+                .putString("og:type", "books.book")
+                .putString("og:title", "A Game of Thrones")
+                .putString("og:description", "In the frozen wastes to the north of Winterfell, sinister and supernatural forces are mustering.")
+                .putString("books:isbn", "0-553-57340-3")
+                .build();
+
+        SharePhoto photo = new SharePhoto.Builder()
+                .setBitmap(bitmap)
+                .setUserGenerated(true)
+                .build();
+
+        // Create an action
+        ShareOpenGraphAction action = new ShareOpenGraphAction.Builder()
+                .setActionType("books.reads")
+                .putObject("book", object)
+                .putPhoto("image", photo)
+                .build();
+// Create the content
+        ShareOpenGraphContent content = new ShareOpenGraphContent.Builder()
+                .setPreviewPropertyName("book")
+                .setAction(action)
+                .build();
         ShareDialog.show(this, content);
+
+
+
     }
 }

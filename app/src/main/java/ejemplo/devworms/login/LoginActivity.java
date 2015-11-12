@@ -63,26 +63,12 @@ public class LoginActivity extends AppCompatActivity{
 
         setContentView(R.layout.activity_login);
 
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo(
-                    "com.devworms.editorial.mango",
-                    PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-
-        } catch (NoSuchAlgorithmException e) {
-
-        }
         ///***************Parse***************************************************
 
 
         Parse.enableLocalDatastore(this);
 
-        Parse.initialize(this, "THcXZNHO4KUAR9StiAp9uSZ6ogpVvMu4P7EGd0B2", "oYALR4CrZhDOYlrOk7zCLszZXixJEXsDtOV4e0zt");
+        Parse.initialize(this, "Rv2InCwEE4RJowtNJVaYqlLw0VpjPLEePcfpHMsw", "oYALR4CrZhDOYlrOk7zCLszZXixJEXsDtOV4e0zt");
 
 
         ParseFacebookUtils.initialize(this.getApplicationContext());
