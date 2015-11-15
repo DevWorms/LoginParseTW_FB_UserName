@@ -45,6 +45,9 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import io.fabric.sdk.android.Fabric;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -57,9 +60,16 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity{
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "1GKXHACPBD5bYHrDYElwU8p9M";
+    private static final String TWITTER_SECRET = "KRg0fcYMTjU3WIahFNTVOVG4uyedVioZETOPQCeLn0LHzw9HpP";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        Fabric.with(this, new Twitter(authConfig));
 
         setContentView(R.layout.activity_login);
 
@@ -76,7 +86,7 @@ public class LoginActivity extends AppCompatActivity{
         ParseTwitterUtils.initialize("af09lpCbgHZv0mDHXjJGT1uq4", "Rmj3opgLofx36g41cI3JakAxGHMSwWIruKwN508RwvrMtQXQdr");
         ///***************Parse***************************************************
 
-
+        ParseUser.logOut();
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
@@ -140,7 +150,7 @@ public class LoginActivity extends AppCompatActivity{
     {
         List<String> permissions = Arrays.asList("user_birthday", "user_location", "user_friends", "email", "public_profile");
 
-        ParseFacebookUtils.logInWithReadPermissionsInBackground(this, permissions , new LogInCallback() {
+        ParseFacebookUtils.logInWithReadPermissionsInBackground(this, permissions, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException err) {
                 if (user == null) {
@@ -148,13 +158,13 @@ public class LoginActivity extends AppCompatActivity{
                 } else if (user.isNew()) {
                     Log.d("MyApp", "User signed up and logged in through Facebook!");
 
-                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
 
                 } else {
 
-                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
 
@@ -213,11 +223,13 @@ public class LoginActivity extends AppCompatActivity{
                 if (user == null) {
                     Log.d("MyApp", "Uh oh. The user cancelled the Twitter login.");
                 } else if (user.isNew()) {
+                    ligarConTwitter(user);
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                     Log.d("MyApp", "User signed up and logged in through Twitter!");
                 } else {
+                    ligarConTwitter(user);
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -226,6 +238,20 @@ public class LoginActivity extends AppCompatActivity{
             }
         });
 
+    }
+
+    private void ligarConTwitter(final ParseUser user)
+    {
+        if (!ParseTwitterUtils.isLinked(user)) {
+            ParseTwitterUtils.link(user, this, new SaveCallback() {
+                @Override
+                public void done(ParseException ex) {
+                    if (ParseTwitterUtils.isLinked(user)) {
+                        Log.d("MyApp", "Woohoo, user logged in with Twitter!");
+                    }
+                }
+            });
+        }
     }
 }
 

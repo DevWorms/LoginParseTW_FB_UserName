@@ -38,8 +38,15 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Compartir"
-        android:onClick="compartir"
+        android:text="Compartir con FB"
+        android:onClick="compartirFb"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Compartir con Tw"
+        android:onClick="compartirTw"
         />
 
 </LinearLayout>

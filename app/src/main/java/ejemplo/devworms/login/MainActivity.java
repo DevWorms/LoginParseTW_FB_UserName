@@ -1,34 +1,44 @@
 package ejemplo.devworms.login;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.model.ShareOpenGraphAction;
 import com.facebook.share.model.ShareOpenGraphContent;
 import com.facebook.share.model.ShareOpenGraphObject;
 import com.facebook.share.model.SharePhoto;
-import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.TwitterApiClient;
+import com.twitter.sdk.android.core.TwitterCore;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.models.Tweet;
+import com.twitter.sdk.android.core.services.StatusesService;
+import com.twitter.sdk.android.tweetcomposer.TweetComposer;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 
 /**
  * Created by sergio on 26/10/15.
  */
-public class MainActivity extends Activity{
+public class MainActivity extends Activity {
 
     TextView tNombre;
     TextView tCorreo;
     EditText eTCompartir;
     ImageView iImagenPerfil;
     ImageView iCompartir;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +47,7 @@ public class MainActivity extends Activity{
 
     }
 
-    public void compartir(View view)
-    {
+    public void compartirFb(View view) {
 
         iCompartir = (ImageView) findViewById(R.id.iCompartir);
         // Create an object
@@ -141,6 +150,17 @@ public class MainActivity extends Activity{
                 .build();
         ShareDialog.show(this, content);
 
+
+    }
+
+    public void compartirTw(View view) {
+
+       // File myImageFile = new File("/path/to/image");
+       // Uri myImageUri = Uri.fromFile(myImageFile);
+        TweetComposer.Builder builder = new TweetComposer.Builder(this)
+                .text("esto es un tweet");
+         //       .image(myImageUri);
+        builder.show();
 
 
     }
