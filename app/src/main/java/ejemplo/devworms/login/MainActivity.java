@@ -155,11 +155,13 @@ public class MainActivity extends Activity {
 
     public void compartirTw(View view) {
 
-       // File myImageFile = new File("/path/to/image");
+        Uri path = Uri.parse("android.resource://ejemplo.devworms.login/" + R.drawable.salchichas);
+
+      //  File myImageFile = new File("/path/to/image");
        // Uri myImageUri = Uri.fromFile(myImageFile);
         TweetComposer.Builder builder = new TweetComposer.Builder(this)
-                .text("esto es un tweet");
-         //       .image(myImageUri);
+                .text("esto es un tweet")
+                .image(path);
         builder.show();
 
 
