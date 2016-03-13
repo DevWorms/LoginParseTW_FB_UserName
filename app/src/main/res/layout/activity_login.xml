@@ -130,6 +130,18 @@
                 android:onClick="loguearConTwitter"
                 android:background="#a5e4ff"/>
 
+            <Button
+                android:layout_width="192dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:text="Login with pinterest"
+                android:textColor="#fff"
+                android:textSize="13dp"
+                android:onClick="loguarConPinterest"
+                android:background="#ff8000"
+                android:id="@+id/button" />
+
 
         </LinearLayout>
 

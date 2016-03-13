@@ -45,6 +45,10 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
+import com.pinterest.android.pdk.PDKCallback;
+import com.pinterest.android.pdk.PDKClient;
+import com.pinterest.android.pdk.PDKException;
+import com.pinterest.android.pdk.PDKResponse;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import io.fabric.sdk.android.Fabric;
@@ -64,6 +68,9 @@ public class LoginActivity extends AppCompatActivity{
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
     private static final String TWITTER_KEY = "1GKXHACPBD5bYHrDYElwU8p9M";
     private static final String TWITTER_SECRET = "KRg0fcYMTjU3WIahFNTVOVG4uyedVioZETOPQCeLn0LHzw9HpP";
+
+    private static final String appID = "4815040272566075428"; //Pinterest
+    private PDKClient pdkClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +104,10 @@ public class LoginActivity extends AppCompatActivity{
 
 
         }
+
+        pdkClient = PDKClient.configureInstance(this, appID);
+        pdkClient.onConnect(this);
+        pdkClient.setDebugMode(true);
 
     }
 
@@ -212,6 +223,8 @@ public class LoginActivity extends AppCompatActivity{
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
+        pdkClient.onOauthResponse(requestCode, resultCode,
+                data);
     }
 
     public void loguearConTwitter(View view)
@@ -253,5 +266,33 @@ public class LoginActivity extends AppCompatActivity{
             });
         }
     }
+
+
+    public void  loguarConPinterest(View view){
+
+        List scopes = new ArrayList<String>();
+        scopes.add(PDKClient.PDKCLIENT_PERMISSION_READ_PUBLIC);
+        scopes.add(PDKClient.PDKCLIENT_PERMISSION_WRITE_PUBLIC);
+        scopes.add(PDKClient.PDKCLIENT_PERMISSION_READ_RELATIONSHIPS);
+        scopes.add(PDKClient.PDKCLIENT_PERMISSION_WRITE_RELATIONSHIPS);
+        scopes.add(PDKClient.PDKCLIENT_PERMISSION_READ_PRIVATE);
+        scopes.add(PDKClient.PDKCLIENT_PERMISSION_WRITE_PRIVATE);
+
+        pdkClient.login(this, scopes, new PDKCallback() {
+            @Override
+            public void onSuccess(PDKResponse response) {
+                Log.d(getClass().getName(), response.getData().toString());
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onFailure(PDKException exception) {
+                Log.e(getClass().getName(), exception.getDetailMessage());
+            }
+        });
+    }
+
 }
 

@@ -2,51 +2,52 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    >
 
-   <ImageView
-       android:id="@+id/iImagenPerfil"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:background="@drawable/com_facebook_profile_picture_blank_portrait"
-       android:layout_gravity="center"/>
+
     <TextView
         android:id="@+id/tNombre"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
 
         android:text="Nombre"/>
     <TextView
         android:id="@+id/tCorreo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="Correo electronico"/>
     <EditText
         android:id="@+id/eTCompartir"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:hint="texto para compartir"/>
-    <ImageView
-        android:id="@+id/iCompartir"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/cup"
-        />
 
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="Compartir con FB"
         android:onClick="compartirFb"
         />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="Compartir con Tw"
         android:onClick="compartirTw"
         />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Compartir con Pinterest"
+        android:id="@+id/buttonPinterest"
+        android:onClick="compartirPin" />
 
 </LinearLayout>

@@ -7,15 +7,23 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.facebook.share.model.ShareOpenGraphAction;
 import com.facebook.share.model.ShareOpenGraphContent;
 import com.facebook.share.model.ShareOpenGraphObject;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.widget.ShareDialog;
+import com.pinterest.android.pdk.PDKCallback;
+import com.pinterest.android.pdk.PDKClient;
+import com.pinterest.android.pdk.PDKException;
+import com.pinterest.android.pdk.PDKResponse;
+import com.pinterest.android.pdk.Utils;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterApiClient;
@@ -49,7 +57,7 @@ public class MainActivity extends Activity {
 
     public void compartirFb(View view) {
 
-        iCompartir = (ImageView) findViewById(R.id.iCompartir);
+      //  iCompartir = (ImageView) findViewById(R.id.iCompartir);
         // Create an object
         /*ShareOpenGraphObject object = new ShareOpenGraphObject.Builder()
                 .putString("og:type", "books.book")
@@ -213,4 +221,30 @@ public class MainActivity extends Activity {
 
 
     }
+
+    public void compartirPin(View view){
+        String pinImageUrl = "http://pruebas.devworms.com/HOME1.png";
+        String board = "337066422050390524";
+        String noteText = "prueba";
+        if (!Utils.isEmpty(noteText) &&!Utils.isEmpty(board) && !Utils.isEmpty(pinImageUrl)) {
+            PDKClient
+                    .getInstance().createPin(noteText, board, pinImageUrl, "www.devworms.com", new PDKCallback() {
+                @Override
+                public void onSuccess(PDKResponse response) {
+                    Log.d(getClass().getName(), response.getData().toString());
+                    Toast.makeText(getParent(),response.getData().toString(),Toast.LENGTH_LONG).show();
+
+                }
+
+                @Override
+                public void onFailure(PDKException exception) {
+                    Log.e(getClass().getName(), exception.getDetailMessage());
+                    Toast.makeText(getParent(),exception.getDetailMessage(),Toast.LENGTH_LONG).show();
+                }
+            });
+        } else {
+            Toast.makeText(this, "Required fields cannot be empty", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
