@@ -39,6 +39,15 @@
         <activity android:name=".MainActivity"
             android:label="@string/app_name"/>
 
+        <activity
+            android:name=".pinterest.CreateBoardActivity"
+            android:label="@string/title_activity_create_board" >
+        </activity>
+        <activity
+            android:name=".pinterest.MyBoardsActivity"
+            android:label="@string/title_activity_my_boards" >
+        </activity>
+
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"

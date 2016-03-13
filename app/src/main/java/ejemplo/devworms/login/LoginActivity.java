@@ -278,6 +278,9 @@ public class LoginActivity extends AppCompatActivity{
         scopes.add(PDKClient.PDKCLIENT_PERMISSION_READ_PRIVATE);
         scopes.add(PDKClient.PDKCLIENT_PERMISSION_WRITE_PRIVATE);
 
+
+
+
         pdkClient.login(this, scopes, new PDKCallback() {
             @Override
             public void onSuccess(PDKResponse response) {

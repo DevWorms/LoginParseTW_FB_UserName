@@ -9,9 +9,16 @@
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="action_delete">Borrar Board</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
     <string name="facebook_app_id">880131518745577</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_new_board">Nuevo Board</string>
+    <string name="action_new_pin">Nuevo Pin</string>
+    <string name="title_activity_create_board">CreateBoardActivity</string>
+    <string name="title_activity_my_boards">MyBoardsActivity</string>
+
 </resources>

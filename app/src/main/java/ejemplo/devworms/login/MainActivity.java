@@ -22,7 +22,9 @@ import com.facebook.share.widget.ShareDialog;
 import com.pinterest.android.pdk.PDKCallback;
 import com.pinterest.android.pdk.PDKClient;
 import com.pinterest.android.pdk.PDKException;
+import com.pinterest.android.pdk.PDKPin;
 import com.pinterest.android.pdk.PDKResponse;
+import com.pinterest.android.pdk.PDKUser;
 import com.pinterest.android.pdk.Utils;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -35,6 +37,10 @@ import com.twitter.sdk.android.tweetcomposer.TweetComposer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.HashMap;
+
+import ejemplo.devworms.login.pinterest.CreateBoardActivity;
+import ejemplo.devworms.login.pinterest.MyBoardsActivity;
 
 /**
  * Created by sergio on 26/10/15.
@@ -223,9 +229,18 @@ public class MainActivity extends Activity {
     }
 
     public void compartirPin(View view){
-        String pinImageUrl = "http://pruebas.devworms.com/HOME1.png";
+
+            Intent i = new Intent(this, MyBoardsActivity.class);
+            startActivity(i);
+        
+      /*  String pinImageUrl = "http://pruebas.devworms.com/HOME1.png";
         String board = "337066422050390524";
         String noteText = "prueba";
+
+
+
+
+
         if (!Utils.isEmpty(noteText) &&!Utils.isEmpty(board) && !Utils.isEmpty(pinImageUrl)) {
             PDKClient
                     .getInstance().createPin(noteText, board, pinImageUrl, "www.devworms.com", new PDKCallback() {
@@ -245,6 +260,8 @@ public class MainActivity extends Activity {
         } else {
             Toast.makeText(this, "Required fields cannot be empty", Toast.LENGTH_SHORT).show();
         }
+*/
+
     }
 
 }
