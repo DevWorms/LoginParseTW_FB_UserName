@@ -165,5 +165,52 @@ public class MainActivity extends Activity {
         builder.show();
 
 
+        /*
+           try {
+
+
+            BitmapDrawable image = (BitmapDrawable) imgView.getDrawable();
+
+            OutputStream outStream = null;
+
+            String extStorageDirectory = Environment
+                    .getExternalStorageDirectory().toString();
+
+            File file = new File(extStorageDirectory, "image.PNG");
+
+            outStream = new FileOutputStream(file);
+            imgReceta.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+            outStream.flush();
+            outStream.close();
+
+
+            Uri ImageUri = Uri.fromFile(file);
+
+            //  File myImageFile = new File("/path/to/image");
+            // Uri myImageUri = Uri.fromFile(myImageFile);
+            TweetComposer.Builder builder = null;
+
+            builder = new TweetComposer.Builder(this.getActivity())
+                    .text("¡Me encanta esta receta!")
+                    .url(new URL("http://appcocina.parseapp.com"))
+                    .image(ImageUri);
+            builder.show();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+
+        }
+        // hay que tener los permisos de
+            < uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+            documentacion aqui https://dev.twitter.com/mopub/overview/fabric
+
+         */
+
+
     }
 }
